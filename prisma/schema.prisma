@@ -1,0 +1,44 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                    Int          @id @default(autoincrement())
+  name                  String
+  email                 String       @unique
+  password              String?
+  social_login_provider String?
+  profile_picture       String?
+  created_at            DateTime     @default(now())
+  scraped_data          ScrapedData[]
+  prompt_logs           PromptLog[]
+}
+
+model ScrapedData {
+  id                   Int      @id @default(autoincrement())
+  url                  String
+  content              String   @db.Text
+  metadata             Json
+  created_by_user_id   Int
+  created_at           DateTime @default(now())
+  user                 User     @relation(fields: [created_by_user_id], references: [id])
+
+  @@index([created_by_user_id])
+}
+
+model PromptLog {
+  id                   Int      @id @default(autoincrement())
+  prompt_text          String
+  generated_output     String   @db.Text
+  created_by_user_id   Int
+  created_at           DateTime @default(now())
+  user                 User     @relation(fields: [created_by_user_id], references: [id])
+
+  @@index([created_by_user_id])
+}
+

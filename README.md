@@ -19,12 +19,12 @@ Before you begin, ensure you have met the following requirements:
 
  Installation
 
-1. Clone the repository:
+1. Clone the repository: https://github.com/Kartikey1306/IDE-Host-Private-Limited.git
 
 2. Set up a virtual environment**:
 python -m venv venv
 source venv/bin/activate  # On Windows, use `nv\Scripts\activate`
-```
+
 
 
 3. Install required packages**:
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 flask db init
 flask db migrate
 flask db upgrade
-```
+
 
 
 5. Run the application**:
